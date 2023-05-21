@@ -13,9 +13,9 @@ from torch import nn
 from torch.autograd import grad
 
 
-class NN_pinn(nn.Module):
+class NN_PINN(nn.Module):
     def __init__(self, input_dim, hid_dim, output_dim):
-        super(NN_pinn, self).__init__()
+        super(NN_PINN, self).__init__()
         self.fc1 = nn.Linear(input_dim, hid_dim) 
         self.relu1 = nn.Tanh()
         self.fc2 = nn.Linear(hid_dim, hid_dim) 
@@ -23,7 +23,6 @@ class NN_pinn(nn.Module):
         self.fc3 = nn.Linear(hid_dim, output_dim) 
 
     def forward(self, x):
-#         out = torch.hstack((x, t))
         out = self.fc1(x)
         out = self.relu1(out)
         out = self.fc2(out)
@@ -132,7 +131,7 @@ def train_pinn(model, n_epochs, f_colloc, b_colloc, ic_colloc, ic, device,
                         'model_state_dict': model.state_dict(),
                         'optimizer_state_dict': optimizer.state_dict(),
                         'loss': loss,
-                        }, 'pinn_checkp_test.pth')
+                        }, 'pinn_checkp_example1.pth')
 
     return model, loss_list, loss_regr_list, loss_physics_list, loss_b_list, loss_ic_list
 
